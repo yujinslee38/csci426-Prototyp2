@@ -7,14 +7,22 @@ using System.Threading;
 
 public class CountdownManager : MonoBehaviour
 {
-    public Text countdownText; //reference to the UI text component
+    public Text countdownText; //reference to the UI text component\
+    public Button startButton;
     public int countdownTime = 3;
 
     private void Start()
     {
+        startButton.onClick.AddListener(OnStartButtonPressed);
+        countdownText.gameObject.SetActive(false);
+    }
+    private void OnStartButtonPressed()
+    {
+        // Hide the button and start the countdown
+        startButton.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(true);
         StartCoroutine(StartCountdown());
     }
-
     private IEnumerator StartCountdown()
     {
         for(int i = countdownTime; i > 0; i--)
@@ -27,13 +35,15 @@ public class CountdownManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         countdownText.gameObject.SetActive(false);
-
+        startButton.gameObject.SetActive(false);
         StartGameplay();
     }
 
     private void StartGameplay()
     {
+        Debug.Log("StartGameplay called");
         //where we enable game logic to set behaviors to active
+        SceneManager.LoadScene("FishingGameScene");
     }
 
     private void Update()

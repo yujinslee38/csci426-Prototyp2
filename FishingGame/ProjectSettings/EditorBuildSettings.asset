@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CountdownScene.unity
     guid: 0242550f3b183ca4db4c9ff25e27f298
   - enabled: 1
     path: Assets/Scenes/GamePlayScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/FishingGameScene.unity
+    guid: 8363d157fbdd34314b44508d9188001b
   m_configObjects: {}
