@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 367736814415099091}
   - component: {fileID: -3948320986327407603}
   - component: {fileID: 582212689653499081}
+  - component: {fileID: -7298782577026860665}
   m_Layer: 0
   m_Name: Bottle
   m_TagString: Attachable
@@ -101,6 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   fadeDuration: 1
+  stop: 0
+  isAttached: 0
   attachableTag: Attachable
   hookTag: Hook
 --- !u!82 &-3948320986327407603
@@ -311,3 +314,16 @@ PolygonCollider2D:
       - {x: 0.445, y: -0.35999998}
       - {x: 0.385, y: -0.37}
   m_UseDelaunayMesh: 0
+--- !u!114 &-7298782577026860665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036627843134721841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc0ccdf693241b89406f6b7c5f334f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: -3

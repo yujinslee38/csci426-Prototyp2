@@ -13,11 +13,19 @@ public class MouseToLine : MonoBehaviour
     private bool isObjectAttached = false;
 
     private Transform attachedObject = null;  // Keep track of the attached object
+    private ScoreManager scoreManager;  // Reference to the ScoreManager
 
     public void Start()
     {
         // Ensure that the BoxCollider2D is attached to the sprite
         boxCollider = GetComponent<BoxCollider2D>();
+
+        // Find the ScoreManager in the scene
+        scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager == null)
+        {
+            Debug.LogError("ScoreManager not found in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -81,6 +89,15 @@ public class MouseToLine : MonoBehaviour
     {
         if (attachedObject != null)
         {
+            // Get the ObjectPoints component to determine the object's point value
+            ObjectPoints objectPoints = attachedObject.GetComponent<ObjectPoints>();
+            if (objectPoints != null)
+            {
+                // Add the object's points to the score
+                scoreManager.AddPoints(objectPoints.points);
+                Debug.Log($"Added {objectPoints.points} points to the score.");
+            }
+
             // Detach the object
             attachedObject.SetParent(null);
 

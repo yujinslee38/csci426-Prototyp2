@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6072919095187541479}
   - component: {fileID: 896869489018586971}
   - component: {fileID: -4877180954326233629}
+  - component: {fileID: 8471410776778077908}
   m_Layer: 0
   m_Name: Goggles
   m_TagString: Attachable
@@ -102,6 +103,7 @@ MonoBehaviour:
   speed: 5
   fadeDuration: 1
   stop: 0
+  isAttached: 0
   attachableTag: Attachable
   hookTag: Hook
 --- !u!82 &896869489018586971
@@ -307,3 +309,16 @@ PolygonCollider2D:
       - {x: 0.42499998, y: -0.24499999}
       - {x: 0.465, y: -0.405}
   m_UseDelaunayMesh: 0
+--- !u!114 &8471410776778077908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3884107009235572662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc0ccdf693241b89406f6b7c5f334f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1
