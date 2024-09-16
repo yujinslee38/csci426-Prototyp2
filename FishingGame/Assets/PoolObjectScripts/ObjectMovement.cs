@@ -7,7 +7,8 @@ public class ObjectMovement : MonoBehaviour
     public float speed = 5f; // Speed at which the object moves
     public float fadeDuration = 1f; // Time to fade out
     private SpriteRenderer spriteRenderer;
-    private bool isAttached = false;
+    public float stop = 0f;
+    private bool isAttached;
     public string attachableTag = "Attachable";
     private Transform hookTransform;
     private Coroutine fadeCoroutine;
@@ -19,7 +20,7 @@ public class ObjectMovement : MonoBehaviour
     {
         // Get the SpriteRenderer component
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        isAttached = false;
         // Calculate the left edge of the screen
         screenLeftEdge = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
     }
@@ -41,25 +42,24 @@ public class ObjectMovement : MonoBehaviour
                 }
             }
         }
-        else if (hookTransform != null)
+        else
         {
+            Debug.Log("Attached to hook: " + isAttached);
             // Keep the object attached to the hook by setting it to the hook's position
             transform.position = hookTransform.position;
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(hookTag) && !isAttached)
+        if (other.CompareTag(attachableTag) && !isAttached)
         {
             // Stop the object's movement and attach it to the hook
             isAttached = true;
-
             // Set the hook as the parent of this object
             hookTransform = other.transform;
-
+            transform.Translate(Vector2.zero);
             // Optionally, if you want to parent the object to the hook in the hierarchy
             transform.SetParent(hookTransform);
-
             // Disable further collision detection to avoid re-triggering
             if (objectCollider != null)
             {

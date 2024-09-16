@@ -46,20 +46,20 @@ public class MouseToLine : MonoBehaviour
     {
         // Check if there are any colliders within the BoxCollider2D when the left mouse button is clicked
         Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f);
-        Debug.Log("collision");
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag(attachableTag) && !isObjectAttached) // Ensure only one object is attached
             {
                 // Attach the object by making it a child of the hook (this object)
                 collider.transform.SetParent(transform);
-
                 // Stop the attached object's movement by disabling its Rigidbody2D (if present)
                 attachedRigidbody = collider.GetComponent<Rigidbody2D>();
                 if (attachedRigidbody != null)
                 {
+
                     attachedRigidbody.velocity = Vector2.zero; // Stop any movement
-                    attachedRigidbody.isKinematic = true; // Make it kinematic so it doesn’t respond to physics anymore
+                    Debug.Log($"Velocity after attachment: {attachedRigidbody.velocity}");
+                    attachedRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
                 }
 
                 // Mark the object as attached
