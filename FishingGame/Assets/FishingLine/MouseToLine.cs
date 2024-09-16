@@ -26,9 +26,15 @@ public class MouseToLine : MonoBehaviour
         MoveSpriteWithMouse();
 
         // Check for mouse click to attach objects
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isObjectAttached)
         {
             AttachObjectsInCollisionBox();
+        }
+
+        //add in limit once line is introduced, so when the mouse button down and the object is over the line. 
+        else if(Input.GetMouseButtonDown(0) && isObjectAttached)
+        {
+            Destroy(transform.GetChild(0).gameObject);
         }
     }
 
