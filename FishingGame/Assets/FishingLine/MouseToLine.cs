@@ -9,11 +9,13 @@ public class MouseToLine : MonoBehaviour
     public float maxY = 3f;
     public string hookTag = "Hook";
     public string attachableTag = "Attachable";
+    public AudioClip attachSound;  // Audio clip for the attachment sound
     private BoxCollider2D boxCollider;
     private bool isObjectAttached = false;
 
     private Transform attachedObject = null;  // Keep track of the attached object
     private ScoreManager scoreManager;  // Reference to the ScoreManager
+    private AudioSource audioSource;  // Reference to AudioSource for playing attachment sound
 
     public void Start()
     {
@@ -25,6 +27,13 @@ public class MouseToLine : MonoBehaviour
         if (scoreManager == null)
         {
             Debug.LogError("ScoreManager not found in the scene.");
+        }
+
+        // Add an AudioSource component if one does not already exist
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -74,6 +83,12 @@ public class MouseToLine : MonoBehaviour
                 if (objectMovement != null)
                 {
                     objectMovement.AttachToHook(transform);
+                }
+
+                // Play the attachment sound
+                if (attachSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(attachSound);
                 }
 
                 // Mark the object as attached
