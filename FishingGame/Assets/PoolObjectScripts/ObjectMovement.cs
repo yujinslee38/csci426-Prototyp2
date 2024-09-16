@@ -8,7 +8,7 @@ public class ObjectMovement : MonoBehaviour
     public float fadeDuration = 1f; // Time to fade out
     private SpriteRenderer spriteRenderer;
     public float stop = 0f;
-    private bool isAttached;
+    public bool isAttached;
     public string attachableTag = "Attachable";
     private Transform hookTransform;
     private Coroutine fadeCoroutine;
@@ -49,28 +49,16 @@ public class ObjectMovement : MonoBehaviour
             transform.position = hookTransform.position;
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
+    public void AttachToHook(Transform hook)
     {
-        if (other.CompareTag(attachableTag) && !isAttached)
+        isAttached = true;
+        hookTransform = hook;
+        speed = 0f; // Stop movement
+        transform.SetParent(hook);
+        // Optionally disable collider if needed
+        if (objectCollider != null)
         {
-            // Stop the object's movement and attach it to the hook
-            isAttached = true;
-            // Set the hook as the parent of this object
-            hookTransform = other.transform;
-            transform.Translate(Vector2.zero);
-            // Optionally, if you want to parent the object to the hook in the hierarchy
-            transform.SetParent(hookTransform);
-            // Disable further collision detection to avoid re-triggering
-            if (objectCollider != null)
-            {
-                objectCollider.enabled = false;
-            }
-
-            // Stop fading out if the object attaches before reaching the edge
-            if (fadeCoroutine != null)
-            {
-                StopCoroutine(fadeCoroutine);
-            }
+            objectCollider.enabled = false;
         }
     }
 

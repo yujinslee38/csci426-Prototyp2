@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MouseToLine : MonoBehaviour
@@ -52,14 +53,11 @@ public class MouseToLine : MonoBehaviour
             {
                 // Attach the object by making it a child of the hook (this object)
                 collider.transform.SetParent(transform);
-                // Stop the attached object's movement by disabling its Rigidbody2D (if present)
-                attachedRigidbody = collider.GetComponent<Rigidbody2D>();
-                if (attachedRigidbody != null)
+                ObjectMovement objectMovement = collider.GetComponent<ObjectMovement>();
+                
+                if(objectMovement != null)
                 {
-
-                    attachedRigidbody.velocity = Vector2.zero; // Stop any movement
-                    Debug.Log($"Velocity after attachment: {attachedRigidbody.velocity}");
-                    attachedRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
+                    objectMovement.AttachToHook(transform);
                 }
 
                 // Mark the object as attached
