@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MouseToLine : MonoBehaviour
@@ -11,14 +10,16 @@ public class MouseToLine : MonoBehaviour
     public string hookTag = "Hook";
     public string attachableTag = "Attachable";
     private BoxCollider2D boxCollider;
-    private Rigidbody2D attachedRigidbody;
     private bool isObjectAttached = false;
+
+    private Transform attachedObject = null;  // Keep track of the attached object
 
     public void Start()
     {
         // Ensure that the BoxCollider2D is attached to the sprite
         boxCollider = GetComponent<BoxCollider2D>();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -30,11 +31,10 @@ public class MouseToLine : MonoBehaviour
         {
             AttachObjectsInCollisionBox();
         }
-
-        //add in limit once line is introduced, so when the mouse button down and the object is over the line. 
-        else if(Input.GetMouseButtonDown(0) && isObjectAttached)
+        else if (Input.GetMouseButtonDown(0) && isObjectAttached)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            // Detach the attached object and destroy it
+            DetachAndDestroyObject();
         }
     }
 
@@ -49,6 +49,7 @@ public class MouseToLine : MonoBehaviour
         // Update the sprite's position to follow the mouse on the Y-axis only
         transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
     }
+
     void AttachObjectsInCollisionBox()
     {
         // Check if there are any colliders within the BoxCollider2D when the left mouse button is clicked
@@ -59,9 +60,10 @@ public class MouseToLine : MonoBehaviour
             {
                 // Attach the object by making it a child of the hook (this object)
                 collider.transform.SetParent(transform);
+                attachedObject = collider.transform; // Keep track of the attached object
+
                 ObjectMovement objectMovement = collider.GetComponent<ObjectMovement>();
-                
-                if(objectMovement != null)
+                if (objectMovement != null)
                 {
                     objectMovement.AttachToHook(transform);
                 }
@@ -72,6 +74,28 @@ public class MouseToLine : MonoBehaviour
                 Debug.Log($"{collider.name} attached to {gameObject.name}");
                 break; // Exit after attaching the first object
             }
+        }
+    }
+
+    void DetachAndDestroyObject()
+    {
+        if (attachedObject != null)
+        {
+            // Detach the object
+            attachedObject.SetParent(null);
+
+            // Destroy the attached object
+            Destroy(attachedObject.gameObject);
+
+            // Reset attachedObject and isObjectAttached flag
+            attachedObject = null;
+            isObjectAttached = false;
+
+            Debug.Log("Object detached and destroyed");
+        }
+        else
+        {
+            Debug.LogWarning("No object attached to destroy.");
         }
     }
 }
