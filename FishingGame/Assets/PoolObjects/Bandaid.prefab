@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3341972302150755338}
   - component: {fileID: -983109657228255881}
   - component: {fileID: -6994884101273998782}
+  - component: {fileID: 8143382459070137676}
   m_Layer: 0
   m_Name: Bandaid
   m_TagString: Attachable
@@ -102,6 +103,7 @@ MonoBehaviour:
   speed: 5
   fadeDuration: 1
   stop: 0
+  isAttached: 0
   attachableTag: Attachable
   hookTag: Hook
 --- !u!82 &-983109657228255881
@@ -118,7 +120,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -292,3 +294,16 @@ PolygonCollider2D:
       - {x: 1.6949999, y: 0.005}
       - {x: 1.675, y: -0.185}
   m_UseDelaunayMesh: 0
+--- !u!114 &8143382459070137676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3496931371685340624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc0ccdf693241b89406f6b7c5f334f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: -1

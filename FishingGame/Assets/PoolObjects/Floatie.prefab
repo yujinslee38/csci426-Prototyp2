@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1738825795102670914}
   - component: {fileID: -1040699841435331720}
   - component: {fileID: -4464171420453371081}
+  - component: {fileID: 856716893964694338}
   m_Layer: 0
   m_Name: Floatie
   m_TagString: Attachable
@@ -102,6 +103,7 @@ MonoBehaviour:
   speed: 5
   fadeDuration: 1
   stop: 0
+  isAttached: 0
   attachableTag: Attachable
   hookTag: Hook
 --- !u!82 &-1040699841435331720
@@ -118,7 +120,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -305,3 +307,16 @@ PolygonCollider2D:
       - {x: 1.87, y: -1.095}
       - {x: 1.8399999, y: -1.255}
   m_UseDelaunayMesh: 0
+--- !u!114 &856716893964694338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117436147430051875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc0ccdf693241b89406f6b7c5f334f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 3

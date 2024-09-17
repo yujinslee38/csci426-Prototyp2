@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6746756611362770983}
   - component: {fileID: 7470129267789248016}
   - component: {fileID: -7564094707287025829}
+  - component: {fileID: 5518658548885043986}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -102,6 +103,7 @@ MonoBehaviour:
   speed: 5
   fadeDuration: 1
   stop: 0
+  isAttached: 0
   attachableTag: Attachable
   hookTag: Hook
 --- !u!82 &7470129267789248016
@@ -118,7 +120,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -278,3 +280,16 @@ PolygonCollider2D:
       - {x: 0.545, y: -0.62}
       - {x: 0.555, y: -0.72999996}
   m_UseDelaunayMesh: 0
+--- !u!114 &5518658548885043986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6020834300945891167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afc0ccdf693241b89406f6b7c5f334f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 5
