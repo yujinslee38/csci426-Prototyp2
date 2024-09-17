@@ -33,4 +33,5 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = "Score: " + score;
         }
     }
+    public void resetPoints() { score = 0; }
 }

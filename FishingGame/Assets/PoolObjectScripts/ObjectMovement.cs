@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ObjectMovement : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class ObjectMovement : MonoBehaviour
     public string attachableTag = "Attachable";
     private float screenLeftEdge;
 
+    private float currentTime;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +42,8 @@ public class ObjectMovement : MonoBehaviour
         {
             transform.position = hookTransform.position;
         }
-    }
+
+    } 
 
     public void AttachToHook(Transform hook)
     {

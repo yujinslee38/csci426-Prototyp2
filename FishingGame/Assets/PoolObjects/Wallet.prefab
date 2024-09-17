@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5518658548885043986}
   m_Layer: 0
   m_Name: Wallet
-  m_TagString: Untagged
+  m_TagString: Attachable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,10 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   fadeDuration: 1
-  stop: 0
   isAttached: 0
   attachableTag: Attachable
-  hookTag: Hook
 --- !u!82 &7470129267789248016
 AudioSource:
   m_ObjectHideFlags: 0

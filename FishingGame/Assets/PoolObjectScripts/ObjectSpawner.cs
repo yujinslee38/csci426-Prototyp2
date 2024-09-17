@@ -9,8 +9,8 @@ public class ObjectSpawner : MonoBehaviour
 
     public Transform[] spawnPoints;  // Array of 3 spawn points for each row
     public float spawnInterval = 2f; // Time between spawning waves
-    public float minSpawnDelay = 0.5f; // Minimum delay between spawns in the same row
-    public float maxSpawnDelay = 1.5f; // Maximum delay between spawns in the same row
+    public float minSpawnDelay = 0.35f; // Minimum delay between spawns in the same row
+    public float maxSpawnDelay = 1.2f; // Maximum delay between spawns in the same row
 
     private float screenRightEdge; // Right edge of the screen for spawning
     private Queue<int> availableRows; // Queue to keep track of available rows

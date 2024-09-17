@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MouseToLine : MonoBehaviour
 {
@@ -44,21 +45,62 @@ public class MouseToLine : MonoBehaviour
     {
         // Control the sprite movement along the Y-axis based on the mouse position
         MoveSpriteWithMouse();
-
-        // Check for mouse click to attach or detach objects
-        if (Input.GetMouseButtonDown(0))
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f);
+        if (colliders.Length > 0)
         {
-            if (!isObjectAttached)
+            foreach (Collider2D collider in colliders)
             {
-                AttachObjectsInCollisionBox();
+                if (collider.CompareTag(attachableTag))
+                {
+                    ObjectPoints objectPoints = collider.GetComponent<ObjectPoints>();
+                    if (objectPoints != null)
+                    {
+                        if (objectPoints.points < 0) // Bad object
+                        {
+                            // Play negative sound and handle bad object
+                            if (negativeSound != null && audioSource != null)
+                            {
+                                audioSource.PlayOneShot(negativeSound);
+                            }
+                            if (isObjectAttached)
+                            {
+                                Destroy(attachedObject.gameObject);
+                                attachedObject = null;
+                                isObjectAttached = false;
+                            }
+                            // Deduct points for bad object
+                            scoreManager.AddPoints(pointsDeductedForBadObject);
+                            Destroy(collider.gameObject); // Destroy bad object immediately
+                            Debug.Log($"Bad object {collider.name} clicked, points deducted and object destroyed.");
+                        }
+                    }
+                }
             }
-            else
+            // Check for mouse click to attach or detach objects
+            if (Input.GetMouseButtonDown(0))
             {
-                DetachAndDestroyObject();
+                if (!isObjectAttached)
+                {
+                    AttachObjectsInCollisionBox();
+                }
+                else if(isObjectAttached && (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)).y > 1.3f))
+                {
+                    DetachAndDestroyObject();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RestartGame();
+                scoreManager.resetPoints();
+                Time.timeScale = 1f;
             }
         }
     }
+    void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
     void MoveSpriteWithMouse()
     {
         // Get the current mouse Y position and convert it from screen space to world space

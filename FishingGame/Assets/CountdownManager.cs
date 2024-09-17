@@ -7,55 +7,43 @@ using System.Threading;
 
 public class CountdownManager : MonoBehaviour
 {
-    public Text countdownText; //reference to the UI text component\
-    public Button startButton;
-    public int countdownTime = 3;
+    public float countdownTime = 60f;  // Set the initial countdown time (e.g., 60 seconds)
+    public Text countdownText;         // Reference to the UI Text (or TextMeshPro)
 
-    private void Start()
+    private float currentTime;
+
+    void Start()
     {
-        startButton.onClick.AddListener(OnStartButtonPressed);
-        countdownText.gameObject.SetActive(false);
+        currentTime = countdownTime;   // Initialize the current time to the countdown time
+        UpdateCountdownDisplay();      // Update the UI at the start
     }
-    private void OnStartButtonPressed()
+
+    void Update()
     {
-        // Hide the button and start the countdown
-        startButton.gameObject.SetActive(false);
-        countdownText.gameObject.SetActive(true);
-        StartCoroutine(StartCountdown());
-    }
-    private IEnumerator StartCountdown()
-    {
-        for(int i = countdownTime; i > 0; i--)
+        if (currentTime > 0)
         {
-            countdownText.text = i.ToString();
-
-            yield return new WaitForSeconds(1);
+            currentTime -= Time.deltaTime;  // Decrease the timer
+            UpdateCountdownDisplay();
         }
-        countdownText.text = "Go!";
-        yield return new WaitForSeconds(1);
-
-        countdownText.gameObject.SetActive(false);
-        startButton.gameObject.SetActive(false);
-        StartGameplay();
-    }
-
-    private void StartGameplay()
-    {
-        Debug.Log("StartGameplay called");
-        //where we enable game logic to set behaviors to active
-        SceneManager.LoadScene("FishingGameScene");
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            RestartGame();
+            currentTime = 0;
+            TimerEnded();                   // Trigger any end of timer event
         }
     }
 
-    private void RestartGame()
+    void UpdateCountdownDisplay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Format the timer as minutes and seconds, for example: "01:30"
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    void TimerEnded()
+    {
+        // Action when the timer ends, such as showing a message or triggering an event.
+        countdownText.text = "00:00";
+        Time.timeScale = 0;
     }
 }
