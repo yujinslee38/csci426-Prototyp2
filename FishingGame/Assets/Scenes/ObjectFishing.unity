@@ -433,9 +433,9 @@ MonoBehaviour:
   maxY: 3
   hookTag: Hook
   attachableTag: Attachable
-  attachSound: {fileID: 8300000, guid: 476d01fcb19f741398fb4b89bd852a5c, type: 3}
-  negativeSound: {fileID: 8300000, guid: d5ebea23248994747a1cd32f02efe6b5, type: 3}
-  goodObjectSound: {fileID: 8300000, guid: a472c1b0b123b4743856237dc0d7056b, type: 3}
+  attachSound: {fileID: 8300000, guid: 46afc112c8108465ab549c914edd949e, type: 3}
+  negativeSound: {fileID: 8300000, guid: 0f34f36630a194786a741569417aaa9a, type: 3}
+  goodObjectSound: {fileID: 8300000, guid: 7bb2f50d9055642ac804cc60960e425c, type: 3}
   pointsDeductedForBadObject: -3
 --- !u!212 &1314304154
 SpriteRenderer:
