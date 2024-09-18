@@ -73,7 +73,9 @@ public class MouseToLine : MonoBehaviour
                             Destroy(collider.gameObject); // Destroy bad object immediately
                             Debug.Log($"Bad object {collider.name} clicked, points deducted and object destroyed.");
                         }
+
                     }
+                    
                 }
             }
             // Check for mouse click to attach or detach objects

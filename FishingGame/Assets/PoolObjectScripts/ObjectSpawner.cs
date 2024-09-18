@@ -8,9 +8,9 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject[] badObjects;  // Array of bad objects prefabs
 
     public Transform[] spawnPoints;  // Array of 3 spawn points for each row
-    public float spawnInterval = 2f; // Time between spawning waves
-    public float minSpawnDelay = 0.35f; // Minimum delay between spawns in the same row
-    public float maxSpawnDelay = 1.2f; // Maximum delay between spawns in the same row
+    public float spawnInterval = 0.1f; // Time between spawning waves
+    public float minSpawnDelay = 0.0f; // Minimum delay between spawns in the same row
+    public float maxSpawnDelay = 0.05f; // Maximum delay between spawns in the same row
 
     private float screenRightEdge; // Right edge of the screen for spawning
     private Queue<int> availableRows; // Queue to keep track of available rows
@@ -54,9 +54,6 @@ public class ObjectSpawner : MonoBehaviour
                 // Wait for a random delay before moving to the next row
                 yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
             }
-
-            // Wait before starting the next spawning wave
-            yield return new WaitForSeconds(spawnInterval);
         }
     }
 }

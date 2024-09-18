@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ObjectMovement : MonoBehaviour
 {
-    public float speed = 5f; // Speed at which the object moves
+    public float speed = 25f; // Speed at which the object moves
     public float fadeDuration = 1f; // Time to fade out
     private SpriteRenderer spriteRenderer;
     public bool isAttached;
